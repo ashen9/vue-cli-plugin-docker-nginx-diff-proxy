@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "ashen"
+  },
+  "bugs": {
+    "url": "https://github.com/ashen9/vue-cli-plugin-docker-nginx-diff-proxy/issues"
+  },
+  "description": "vue-cli 3.0 plugin that sets up a nginx docker container that serves your vue app",
+  "homepage": "https://github.com/ashen9/vue-cli-plugin-docker-nginx-diff-proxy",
+  "keywords": [
+    "vue",
+    "vue-cli",
+    "docker",
+    "nginx",
+    "proxy",
+    "deployment"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "vue-cli-plugin-docker-nginx-diff-proxy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashen9/vue-cli-plugin-docker-nginx-diff-proxy.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.1"
+}
