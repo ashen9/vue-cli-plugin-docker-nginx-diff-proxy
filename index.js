@@ -1,8 +1,13 @@
+const WebpackPlugin = require('./WebpackPlugin');
 module.exports = (api, projectOptions) => {
     const development = process.env.NODE_ENV !== "production";
 
     const options =
         (projectOptions.pluginOptions || {}).dockerNginxProxy || {};
+
+	api.configureWebpack(webpackConfig => {
+		webpackConfig.plugins.push(new WebpackPlugin(options));
+	});
 
 
   api.registerCommand(

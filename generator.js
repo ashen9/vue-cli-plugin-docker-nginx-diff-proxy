@@ -18,7 +18,7 @@ module.exports = api => {
         dockerNginxProxy: dockerNginxProxy
       }
     }
-
   });
+  // api.injectImports(api.entryFile, `import './registerServiceWorker'`)
   api.render('./template');
 };
