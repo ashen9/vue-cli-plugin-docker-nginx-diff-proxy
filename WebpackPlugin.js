@@ -23,7 +23,6 @@ module.exports = class WebpckPlugin {
 
   apply (compiler) {
     compiler.hooks.compilation.tap(ID, compilation => {
-      console.log('`````````');
       //nginx，找到*.conf文件
       const nginxPath = './nginx';
       FS.readdir(nginxPath, (err,files) => {
@@ -47,7 +46,7 @@ module.exports = class WebpckPlugin {
                   Object.keys(this.options).map((key) => {
                     if (item.includes(key)) {
                       console.log(this.options[key]);
-                      replaceFile(path, /^http\:\/\/localhost\:8080/g, this.options[key]);
+                      replaceFile(path, /http\:\/\/localhost\:8080/g, this.options[key]); // ^ 以什么开头
                     }
                   });
                   // replaceFile(path,/console\.log\(\"0function0\"\)/g,"zyk");
