@@ -9,7 +9,7 @@ module.exports = api => {
     scripts[key] = `docker build --build-arg ENV=${e} . -t ${APPNAME}-${e}`;
     const key2 = `docker-run-${e}`;
     scripts[key2] = `npm run ${key} && docker run -d -p 3000:80 ${APPNAME}-${e}`;
-    dockerNginxProxy[e] = 'localhost:8080';
+    dockerNginxProxy[e] = 'http://localhost:8080';
   });
   api.extendPackage({
     scripts: scripts,

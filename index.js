@@ -28,6 +28,8 @@ module.exports = (api, projectOptions) => {
     },
     args => {
       require('./docker.js')(args);
+      // npm install E:\workspace-webstorm\vue-cli-plugin-docker-nginx-diff-proxy 本地开发测试
+      //  vue invoke vue-cli-plugin-docker-nginx-diff-proxy
     },
   );
 };
