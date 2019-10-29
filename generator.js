@@ -1,6 +1,5 @@
-module.exports = api => {
-  // console.log(api.rootOptions.projectName);
-  const APPNAME = api.rootOptions.projectName;
+module.exports = (api, options, rootOptions) => {
+  const APPNAME = rootOptions.projectName;
   let envEntity = ['dev', 'qa', 'pro'];
   let scripts = {};
   let dockerNginxProxy = {};
@@ -14,7 +13,7 @@ module.exports = api => {
   api.extendPackage({
     scripts: scripts,
     vue: {
-      pluginOptions: {
+      pluginOptions: api.hasPlugin('vue-cli-plugin-docker-nginx-diff-proxy') ? {} : {
         dockerNginxProxy: dockerNginxProxy
       }
     }
