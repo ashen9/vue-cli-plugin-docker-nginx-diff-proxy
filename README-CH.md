@@ -3,6 +3,10 @@
 > 此插件用于构建不同环境反向代理的docker镜像
 
 这是一个vue cli插件，它使用nginx添加了一个最小的docker部署（**~19mb**+静态文件）来为vue应用提供服务。
+
+**准备:** *你必须有一个'build-proxy'的启动命令在你的package.json内 , 并且'build-proxy'可以将你的项目构建为请求路径<proxy_prefix>*
+
+
 ### 安装
 
 ```

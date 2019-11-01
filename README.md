@@ -2,7 +2,9 @@
 [中文](https://github.com/ashen9/vue-cli-plugin-docker-nginx-diff-proxy/blob/master/README-CH.md) | [English](https://github.com/ashen9/vue-cli-plugin-docker-nginx-diff-proxy/blob/master/README.md)
 > This plug-in is to build a docker image of multiple environment reverse proxy
 
-This is a vue-cli-plugin that adds a minimal docker deployment (**~19MB** + static files) using nginx to serve your vue-app
+This is a vue-cli-plugin that adds a minimal docker deployment (**~19MB** + static files) using nginx to serve your vue-app  
+  
+**prepare:** *you must have a 'build-proxy' Scripts in your package.json , and 'build-proxy' can build your app to request <proxy_prefix>*
 
 ### Installation
 
@@ -70,3 +72,6 @@ Please make sure to have [docker](https://docs.docker.com/install/) installed an
 You will find that the three nginx configuration files generated automatically are the same,
 This is to increase flexibility,You can add and modify any configuration at will in different environments.
 You can also add templates to support more environments.
+
+
+

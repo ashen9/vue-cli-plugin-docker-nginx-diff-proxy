@@ -1,5 +1,5 @@
 module.exports = (api, options, rootOptions) => {
-  const APPNAME = rootOptions.projectName;
+  const APPNAME = api.rootOptions.projectName;
   let envEntity = ['dev', 'qa', 'pro'];
   let scripts = {};
   let env_prefix = {};
