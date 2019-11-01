@@ -14,7 +14,7 @@ module.exports = (api, options, rootOptions) => {
   api.extendPackage({
     scripts: scripts,
     vue: {
-      pluginOptions: api.hasPlugin('vue-cli-plugin-docker-nginx-diff-proxy') ? {} : {
+      pluginOptions: {
         dockerNginxProxy: {
 	        proxy_prefix,
 	        env_prefix
