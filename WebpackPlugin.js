@@ -72,7 +72,7 @@ module.exports = class WebpckPlugin {
                 });
 
                 const text = `location ${this.proxy_prefix}`
-                const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]} }`;
+                const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]}; }`;
                 taskConfFile(path, insertText, text);
               }
             });
