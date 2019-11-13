@@ -12,7 +12,6 @@ let taskConfFile = function(filePath,targetStr,text){
       var regExp = new RegExp(`${text}.*\}`, 'g');
 
       str = str.replace(regExp, targetStr);
-      console.log(str);
       FS.writeFile(filePath, str, function (err) {
         if (err) return err;
       });
@@ -22,7 +21,7 @@ let taskConfFile = function(filePath,targetStr,text){
   });
 }
 //读取文件，并且替换文件中指定的字符串
-let replaceFile = function(filePath,sourceRegx,targetStr){
+/*let replaceFile = function(filePath,sourceRegx,targetStr){
   FS.readFile(filePath,function(err,data){
     if(err){
       return err;
@@ -33,7 +32,7 @@ let replaceFile = function(filePath,sourceRegx,targetStr){
       if (err) return err;
     });
   });
-}
+}*/
 //向文件倒数第二行插入
 let resertFile = function (filePath, targetStr) {
   const data = FS.readFileSync(filePath, 'utf8').split('\n');
@@ -49,7 +48,7 @@ module.exports = class WebpckPlugin {
   }
 
   apply (compiler) {
-    compiler.hooks.compilation.tap(ID, compilation => {
+    var emit =  (compilation, callback) => {
       //nginx，找到*.conf文件
       const nginxPath = './nginx';
       FS.readdir(nginxPath, (err,files) => {
@@ -66,30 +65,27 @@ module.exports = class WebpckPlugin {
                 return err;
               }
               let isFile = status.isFile();//是文件
-              let isDir = status.isDirectory();//是文件夹
-              if (isFile) {
-                if (item.match(new RegExp(/\.conf$/))) {
-                  Object.keys(this.env_prefix).map((key) => {
-                    if (item.includes(key)) {
-                      // replaceFile(path, /http\:\/\/localhost\:8080/g, this.env_prefix[key]); // ^ 以什么开头
-                      // replaceFile(path, /location \/proxy/g, `location ${this.proxy_prefix[key]}`); // ^ 以什么开头
-                      const text = `location ${this.proxy_prefix}`
-                      const insertText = `      ${text} { proxy_pass  ${this.env_prefix[key]} }\n`;
-                      taskConfFile(path, insertText, text);
-                      // resertFile(path, insertText);
-                    }
+              // let isDir = status.isDirectory();//是文件夹
+              if (isFile && item.match(new RegExp(/\.conf$/))) {
+                  const prefix_key = Object.keys(this.env_prefix).find((key) => {
+                    return item.includes(key);
                   });
-                  // replaceFile(path,/console\.log\(\"0function0\"\)/g,"zyk");
 
-                }
-              }
-              if (isDir) {
-                console.log("文件夹：" + item);
+                  const text = `location ${this.proxy_prefix}`
+                  const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]} }\n`;
+                  taskConfFile(path, insertText, text);
               }
             });
+            callback();
           });
         }
       });
-    })
+    }
+    if (compiler.hooks) {
+      var plugin = {name: ID};
+      compiler.hooks.emit.tapAsync(plugin, emit);
+    } else {
+      compiler.plugin('emit', emit);
+
   }
 }
