@@ -66,7 +66,7 @@ module.exports = class WebpckPlugin {
               }
               let isFile = status.isFile();//是文件
               // let isDir = status.isDirectory();//是文件夹
-              if (isFile && item.match(new RegExp(/\.conf$/))) {
+              if (isFile && item.match(new RegExp(/^default-.*.conf$/))) {
                 const prefix_key = Object.keys(this.env_prefix).find((key) => {
                   return item.includes(key);
                 });
