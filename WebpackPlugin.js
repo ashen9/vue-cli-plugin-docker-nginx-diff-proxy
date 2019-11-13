@@ -48,10 +48,10 @@ module.exports = class WebpckPlugin {
   }
 
   apply (compiler) {
-    var emit =  (compilation, callback) => {
+    var emit = (compilation, callback) => {
       //nginx，找到*.conf文件
       const nginxPath = './nginx';
-      FS.readdir(nginxPath, (err,files) => {
+      FS.readdir(nginxPath, (err, files) => {
         if (err) {
           return err;
         }
@@ -67,13 +67,13 @@ module.exports = class WebpckPlugin {
               let isFile = status.isFile();//是文件
               // let isDir = status.isDirectory();//是文件夹
               if (isFile && item.match(new RegExp(/\.conf$/))) {
-                  const prefix_key = Object.keys(this.env_prefix).find((key) => {
-                    return item.includes(key);
-                  });
+                const prefix_key = Object.keys(this.env_prefix).find((key) => {
+                  return item.includes(key);
+                });
 
-                  const text = `location ${this.proxy_prefix}`
-                  const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]} }\n`;
-                  taskConfFile(path, insertText, text);
+                const text = `location ${this.proxy_prefix}`
+                const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]} }\n`;
+                taskConfFile(path, insertText, text);
               }
             });
             callback();
@@ -87,5 +87,6 @@ module.exports = class WebpckPlugin {
     } else {
       compiler.plugin('emit', emit);
 
+    }
   }
 }
