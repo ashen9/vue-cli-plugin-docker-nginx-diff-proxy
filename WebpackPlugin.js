@@ -16,7 +16,7 @@ let taskConfFile = function(filePath,targetStr,text){
         if (err) return err;
       });
     } else {
-      resertFile(filePath, targetStr);
+      resertFile(filePath, targetStr + '\n');
     }
   });
 }
@@ -72,7 +72,7 @@ module.exports = class WebpckPlugin {
                 });
 
                 const text = `location ${this.proxy_prefix}`
-                const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]} }\n`;
+                const insertText = `${text} { proxy_pass  ${this.env_prefix[prefix_key]} }`;
                 taskConfFile(path, insertText, text);
               }
             });
